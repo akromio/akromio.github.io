@@ -20,9 +20,10 @@ Podemos consultar su valor fácilmente con el comando **gattuso e KRM_REGISTRIES
 
 ```bash
 $ gattuso e KRM_REGISTRIES
-Variable        Value       Desc.
----------------------------------------------------------------------------------------
-KRM_REGISTRIES  local,user  Available registries to use in order, separated by commas.
+
+ Variable        Value       Desc.
+----------------------------------------------------------------------------------------
+ KRM_REGISTRIES  local,user  Available registries to use in order, separated by commas.
 ```
 
 En el ejemplo anterior, se buscará primero en el registro local del proyect y, a continuación, en el del usuario.
@@ -33,6 +34,14 @@ El siguiente ejemplo muestra cómo solicitar la ejecución del trabajo predeterm
 
 ```bash
 gattuso -g local,user r
+```
+
+## Listado de catálogos de un registro
+
+Para conocer los catálogos disponibles en un registro, utilice el comando **gattuso g** como, por ejemplo:
+
+```bash
+gattuso g nombreRegistro
 ```
 
 ## Registros de sistema de archivos
@@ -98,7 +107,7 @@ Los registros de Git se configuran mediante los siguientes formatos:
 
 ```bash
 git
-git://usuario
+git://repositorio
 git://usuario/repositorio
 git://usuario/repositorio/rama
 git://usuario/repositorio/rama/prefijo
@@ -108,6 +117,7 @@ Cuando no se indican todos los campos, estos se toman de las variables de entorn
 
 ```bash
 $ gattuso e KRM_REGISTRY_GIT_*
+
  Variable                 Value                      Desc.
 --------------------------------------------------------------------------------------------
  KRM_REGISTRY_GIT_HOST    raw.githubusercontent.com  Host where the Git repository is.                                
@@ -122,10 +132,6 @@ Así pues, si solo indicamos *git*, será lo mismo que *git://akromio/builtin-re
 Si lo deseamos, podemos dejar cualquier sección en blanco para que su valor se tome de la variable de entorno correspondiente.
 Así, por ejemplo, *git:///nodejs-registry*, será lo mismo que *git://akromio/nodejs-registry/master/.akromio*.
 
-## Listado de catálogos de un registro
+### Listado de catálogos de un registro de *Git*
 
-Para conocer los catálogos disponibles en un registro, utilice el comando **gattuso g** como, por ejemplo:
-
-```bash
-gattuso g -g git
-```
+Este tipo de registro no soporta esta operación.
