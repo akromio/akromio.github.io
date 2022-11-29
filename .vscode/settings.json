@@ -3,6 +3,11 @@
   "[markdown]": {
     "editor.formatOnSave": false
   },
-  "cSpell.language": "en",
-  "cSpell.words": []
+  "cSpell.language": "es",
+  "cSpell.words": [
+    "akromio",
+    "jekyll",
+    "minimal",
+    "theme"
+  ]
 }
