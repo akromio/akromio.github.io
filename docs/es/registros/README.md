@@ -1,3 +1,8 @@
+---
+title: Registros
+permalink: /es/registros
+---
+
 # Registros
 
 Un **registro** (*registry*) es un contenedor de catálogos.

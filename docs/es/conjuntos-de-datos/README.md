@@ -1,3 +1,8 @@
+---
+title: Conjuntos de datos
+permalink: /es/conjuntos-de-datos
+---
+
 # Conjuntos de datos
 
 Un **conjunto de datos** (*dataset*) es una colección de datos que podemos usar.
