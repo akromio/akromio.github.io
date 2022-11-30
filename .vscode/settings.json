@@ -4,10 +4,5 @@
     "editor.formatOnSave": false
   },
   "cSpell.language": "es",
-  "cSpell.words": [
-    "akromio",
-    "jekyll",
-    "minimal",
-    "theme"
-  ]
+  "cSpell.words": ["akromio", "jekyll", "minimal", "site", "theme"]
 }
