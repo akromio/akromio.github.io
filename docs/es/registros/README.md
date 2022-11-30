@@ -188,27 +188,27 @@ $
 ```
 
 El trabajo predeterminado ***create-registry*** crea una estructura inicial de registro y el trabajo ***create-catalog*** añade un catálogo al registro.
-Veamos un ejemplo ilustrativo:
+Veamos un ejemplo ilustrativo de un **registro Git** para su reutilización:
 
 ```bash
-$ gattuso -g git -c registry r
+[/tmp/prueba]$ gattuso -g git -c registry r
 > Create registry
 ? Registry name prueba
-? Registry desc Registro de prueba.
-  - fs: create dir '/tmp/akromio/registry//jobs/catalogs/' if not exists ok (2 ms)
-  - registry: copy '/jobs/catalogs/_registry/_gitignore' to '/tmp/akromio/.gitignore' ok (379 ms)
-  - file: write content to '/tmp/akromio/README.md' ok (2 ms)
-$
+? Registry desc Registro Git de prueba.
+? Registry dir (local: .akromio; git: registry) registry
+  - fs: create dir '/tmp/prueba/registry//jobs/catalogs/' if not exists ok (1 ms)
+  - registry: copy '/jobs/catalogs/_registry/_gitignore' to '/tmp/prueba/.gitignore' ok (1 ms)
+  - file: write content to '/tmp/prueba/README.md' ok (0 ms)
 ```
 
 Ahora, cómo añadir un catálogo:
 
 ```bash
-$ gattuso -g git -c registry r create-catalog
+[/tmp/prueba]$ gattuso -g git -c registry r create-catalog
 > Create catalog
 ? Catalog name default
 ? Catalog desc Catálogo predeterminado.
-  - fs: create dir '/tmp/akromio/registry//jobs/catalogs//_default' if not exists ok (2 ms)
-  - file: write content to '/tmp/akromio/registry//jobs/catalogs//default.yaml' ok (2 ms)
-$
+? Registry dir (local: .akromio; git: registry) registry
+  - fs: create dir '/tmp/prueba/registry//jobs/catalogs//_default' if not exists ok (2 ms)
+  - file: write content to '/tmp/prueba/registry//jobs/catalogs//default.yaml' ok (2 ms)
 ```
