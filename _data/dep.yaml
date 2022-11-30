@@ -1,0 +1,6 @@
+# site.data.dep.variableName
+
+- name: nodejs
+  github:
+    version: 18
+    os: Linux
