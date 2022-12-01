@@ -6,3 +6,10 @@ baseurl: /
 remote_theme: jekyll/minima
 minima:
   skin: dark
+  social_links:
+    - platform: github
+      user_url: https://github.com/akromio
+author:
+  name: Sia Codelabs
+  email: doc@akromio.com
+google_analytics: G-Z2FF4NRNY9
