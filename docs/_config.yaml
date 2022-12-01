@@ -3,6 +3,6 @@ description: Documentación del proyecto Akromio.
 url: https://akromio.com
 baseurl: /
 
-theme: minima
+remote_theme: jekyll/minima
 minima:
   skin: dark
