@@ -1,5 +1,7 @@
-theme: jekyll-theme-minimal
 title: Akromio | Doc
 description: Documentación del proyecto Akromio.
 url: https://akromio.com
 baseurl: /
+
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: dark
