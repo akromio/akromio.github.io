@@ -1,5 +1,3 @@
-# Introducción a Akromio
-
 01. Introducción a Akromio
 02. [Instalación](es/instalacion)
 03. [Conjuntos de datos](es/conjuntos-de-datos)
