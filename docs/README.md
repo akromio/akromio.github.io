@@ -11,4 +11,4 @@ permalink: /
 04. [Catálogos](es/catalogos)
 05. [Registros](es/registros)
 
-Última actualización: *{{ site.time }}*
+Última actualización: *{{ site.time | date: "%d-%m-%Y %H:%M" }}*
