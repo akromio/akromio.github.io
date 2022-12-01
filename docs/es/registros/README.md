@@ -3,8 +3,6 @@ title: Registros
 permalink: /es/registros
 ---
 
-# Registros
-
 Un **registro** (*registry*) es un contenedor de catálogos.
 Estos registros utilizan **conectores** (*connectors*) los cuales contienen la lógica que permite acceder a los registros de un determinado almacenamiento.
 Son como adaptadores que permiten que los catálogos se encuentren almacenados en distintos almacenes de datos como, por ejemplo:

@@ -1,8 +1,3 @@
----
-title: Akromio
-permalink: /
----
-
 # Introducción a Akromio
 
 01. Introducción a Akromio

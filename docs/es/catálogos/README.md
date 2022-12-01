@@ -3,8 +3,6 @@ title: Catálogos
 permalink: /es/catalogos
 ---
 
-# Catálogos
-
 Un **catálogo** (*catalog*) representa un índice de trabajos, donde un **trabajo** (*job*) una operación para realizar alguna cosa particular como, por ejemplo, un proceso automatizado.
 Los catálogos se declaran en formato **YAML**.
 He aquí un ejemplo ilustrativo para abrir boca:

@@ -3,8 +3,6 @@ title: Instalación
 permalink: /es/instalacion
 ---
 
-# Instalación
-
 **Akromio** es una *suite* de automatización desarrollada en **Node.js**, por lo que podemos descargar sus aplicaciones fácilmente del registro **NPM**.
 Podemos hacerlo, manualmente y, en caso de **GitHub Actions**, mediante acciones.
 Las aplicaciones disponibles actualmente son:
