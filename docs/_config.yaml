@@ -3,8 +3,10 @@ description: Documentación del proyecto Akromio.
 url: https://akromio.com
 baseurl: /
 
-ws:
+brand:
+  name: Akromio
   author: Sia Codelabs
+ws:
   year: 2022
 
 remote_theme: jekyll/minima
