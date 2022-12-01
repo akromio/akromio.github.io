@@ -1,7 +1,12 @@
-01. Introducción a Akromio
-02. [Instalación](es/instalacion)
-03. [Conjuntos de datos](es/conjuntos-de-datos)
-04. [Catálogos](es/catalogos)
-05. [Registros](es/registros)
+## Documentación en Español
+
+01. [Instalación](es/instalacion)
+02. [Conjuntos de datos](es/conjuntos-de-datos)
+03. [Catálogos](es/catalogos)
+04. [Registros](es/registros)
 
 Última actualización: *{{ site.time | date: "%d-%m-%Y %H:%M" }}*
+
+## English documentation
+
+Coming soon...
