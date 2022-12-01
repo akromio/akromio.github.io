@@ -3,8 +3,6 @@ title: Conjuntos de datos
 permalink: /es/conjuntos-de-datos
 ---
 
-# Conjuntos de datos
-
 Un **conjunto de datos** (*dataset*) es una colección de datos que podemos usar.
 Atendiendo a quién los define, se distingue entre conjuntos de datos globales y locales.
 
