@@ -156,17 +156,63 @@ Y ***fin*** contiene las finales, si fuera necesario.
 En el ejemplo anterior, la macro necesita datos del usuario que deseamos solicitar al usuario.
 Como esos datos son necesarios para el cuerpo de la macro, las añadimos a ***ini***.
 
-## Ejemplo
+## Pasos
 
-A continuación, vamos a mostrar otro ejemplo más completo que utiliza **Docker** para levantar un entorno de desarrollo.
-Este entorno estará formado por una instancia de **Redis**, otra de **PostgreSQL** y un servicio web cuyo código se encuentra en un directorio particular de nuestro equipo.
+Un **paso** (*step*) no es más que una acción a realizar en una operación compuesta.
+Se puede indicar en las secciones ***ini***, ***steps*** o ***fin***.
+Se pueden expresar de varias formas.
 
-Veamos algunas cosas que debemos tener en cuenta antes de comenzar a diseñar nuestro catálogo y el trabajo que realizará el levantamiento de este entorno:
+### Pasos textuales
 
-- El servicio web debe poder acceder a las instancias de **Redis** y **PostgreSQL** mediante los nombres de sus contendedores.
-  Para ello, debemos crear una red de **Docker** y añadir los tres contenedores a ella.
+El paso contiene en una cadena de texto la operación y los argumentos a pasar.
+Por ejemplo:
 
-- Realizaremos un *ping* automático desde el servicio web a los contenedores de bases de datos para comprobar que todo está bien configurado.
+```yaml
+- cr.copy $(src)/_gitignore $(dst)/.gitignore
+```
 
-- El servicio web contendrá su código en el disco local.
-  Por ello, tendremos que utilizar un 
+### Pasos en lista
+
+El paso se indica como una lista de elementos donde el primero es la operación y los restantes son sus argumentos.
+Ejemplo:
+
+```yaml
+- [cr.copy, $(src)/_gitignore, $(dst)/.gitignore]
+```
+
+### Pasos en objetos
+
+Otra posibilidad es indicar el paso en forma de objeto.
+Sintaxis:
+
+```yaml
+# paso
+- step: pasoTextualOEnLista
+
+# paso silencioso
+- quiet: pasoTextualOEnLista
+
+# paso que muestra su log
+- log: pasoTextualOEnLista
+```
+
+### Pasos condicionales
+
+De manera predeterminada, todo paso se ejecuta cuando le llega el turno.
+En ocasiones, es preferible un **paso condicional** (*conditional step*), aquel que sólo debe ejecutarse si una condición asociada se cumple.
+Este tipo de pasos se indican en modo objeto y en su **campo *if*** (*if field*) indicaremos la condición a cumplirse:
+
+```yaml
+- step: pasoTextualOEnLista
+  if: condición
+```
+
+Aunque actualmente se puede indicar cualquier expresión **JavaScript** válida, sólo debe utilizar los operadores de indexación (`[]`), acceso a campo (`.`) y condicionales (`==`, `!=`, `<`, `<=`, `>`, `>=`).
+Y use sólo las comillas simples para los textos literales (`'`), no las dobles (`"`).
+En el futuro, el evaluador sólo aceptará esto.
+El contexto de datos con los que trabajará el evaluador de la expresión es el *dataset* disponible en ese momento.
+Ejemplo:
+
+```yaml
+if: platform == 'linux'
+```
