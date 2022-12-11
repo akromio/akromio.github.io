@@ -30,10 +30,30 @@ He aquí un ejemplo ilustrativo:
 spec: v1.0
 desc: Catalog for automating the project tasks.
 extends: base:///_intl.yaml
+
+dataset:
+  - const: redis
+    value:
+      image: redislabs/rejson
+      container: vql-redis
+      port: 6379
+
+jobs:
+  - group: redis
+    jobs:
+    - macro: redis/start
+      desc: Start the Redis container
+      steps:
+        - [exec.log, sudo docker run --name $(redis.container) --rm -d -p $(redis.port):6379 $(redis.image)]
+
+    - macro: redis/stop
+      desc: Stop the Redis container
+      steps:
+        - [exec.log, sudo docker stop $(redis.container)]
 ```
 
 En el catálogo que extiende, podemos añadir nuevos conjuntos de datos, trabajos, etc.
-Los aquí definidos sobrescribirán a los indicados en el catálogo reutilizable.
+En caso de conflicto, los aquí definidos sobrescribirán a los indicados en el catálogo reutilizable.
 
 ## Ejemplo
 
