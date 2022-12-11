@@ -15,7 +15,7 @@ Cada vez que un paquete de este repositorio quiera extender uno de estos catálo
 Ejemplo:
 
 ```
-base:///_intl.yaml
+base:///_package.yaml
 ```
 
 Los catálogos que comienzan por un subrayado se conocen como internos y no se listan mediante el comando **gattuso g**.
@@ -29,7 +29,7 @@ He aquí un ejemplo ilustrativo:
 ```yaml
 spec: v1.0
 desc: Catalog for automating the project tasks.
-extends: base:///_intl.yaml
+extends: base:///_itg.yaml
 
 dataset:
   - const: redis
