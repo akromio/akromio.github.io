@@ -24,6 +24,13 @@ Aplicación | Comando de instalación
 -- | --
 **gattuso** | `npm i -g @akromio/gattuso`
 
+Después de la instalación, es buena práctica comprobar que tenemos acceso a las aplicaciones instaladas mostrando su ayuda o su versión:
+
+```bash
+gattuso -v
+gattuso help
+```
+
 ## Instalación  en flujo de *GitHub Actions*
 
 Para **GitHub Actions**, están disponibles las siguientes acciones:
@@ -37,4 +44,30 @@ Ejemplo:
 ```yaml
 - name: Set up Gattuso
   uses: akromio/setup-gattuso@v1
+```
+
+## Comandos de las aplicaciones
+
+### Variables de entorno
+
+Para conocer las variables de entorno utilizadas por **Akromio**, podemos utilizar el comando **env**:
+
+```bash
+# lista todas las variables de entorno
+gattuso e
+
+# lista la variable de entorno indicada
+gattuso e VARIABLE
+```
+
+### Información del sistema
+
+De cara a informar de un *bug*, es buena práctica obtener cierta información del sistema.
+Para esta situación, podemos utilizar el comando **sys**:
+
+```bash
+$ gattuso sys
+OS: linux (5.15.0-56-generic) #62-Ubuntu SMP Tue Nov 22 19:54:14 UTC 2022
+Arch: x64
+Node.js: v18.9.0
 ```
