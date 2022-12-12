@@ -11,7 +11,7 @@ ws:
 
 remote_theme: jekyll/minima
 minima:
-  skin: auto
+  skin: dark
   social_links:
     - platform: github
       user_url: https://github.com/akromio
