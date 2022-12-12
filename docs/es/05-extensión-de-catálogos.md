@@ -44,12 +44,13 @@ jobs:
     - macro: redis/start
       desc: Start the Redis container
       steps:
-        - [exec.log, sudo docker run --name $(redis.container) --rm -d -p $(redis.port):6379 $(redis.image)]
+        - exec.log sudo docker pull $(redis.image)
+        - exec.log sudo docker run --name $(redis.container) --rm -d -p $(redis.port):6379 $(redis.image)
 
     - macro: redis/stop
       desc: Stop the Redis container
       steps:
-        - [exec.log, sudo docker stop $(redis.container)]
+        - exec.log sudo docker stop $(redis.container)
 ```
 
 En el catálogo que extiende, podemos añadir nuevos conjuntos de datos, trabajos, etc.
