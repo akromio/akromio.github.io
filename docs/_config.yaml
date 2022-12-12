@@ -1,4 +1,4 @@
-title: Akromio
+title: akromio
 description: Documentación
 url: https://akromio.com
 baseurl: /
@@ -11,7 +11,7 @@ ws:
 
 remote_theme: jekyll/minima
 minima:
-  skin: dark
+  skin: auto
   social_links:
     - platform: github
       user_url: https://github.com/akromio
