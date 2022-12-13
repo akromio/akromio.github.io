@@ -4,5 +4,13 @@
     "editor.formatOnSave": false
   },
   "cSpell.language": "es",
-  "cSpell.words": ["akromio", "jekyll", "minimal", "site", "theme"]
+  "cSpell.words": [
+    "akromio",
+    "immediate",
+    "interval",
+    "jekyll",
+    "minimal",
+    "site",
+    "theme"
+  ]
 }
