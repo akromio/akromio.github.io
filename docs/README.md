@@ -5,6 +5,7 @@
 03. [Catálogos](es/catalogos)
 04. [Registros](es/registros)
 05. [Extensión de catálogos](es/extension-de-catalogos)
+06. [Disparadores de trabajos](es/disparadores-de-trabajos)
 
 *Última actualización*: {{ site.time | date: "%d-%m-%Y %H:%M" }}
 
