@@ -11,7 +11,7 @@ Un **evento** (*event*) es algo acaecido en el sistema y que tiene la capacidad 
 ## Propiedad *on* de los catálogos
 
 Estos disparadores se definen mediante la propiedad ***on*** del catálogo.
-Cada disparador tiene su propio identificador de tipo y, por otra parte, el trabajo que debe ejecutar cuando su evento asociado se produzca.
+Cada disparador tiene su propio identificador de tipo.
 Esta propiedad consiste en una lista de objetos donde cada uno de ellos representa un determinado disparador.
 Podemos tener varios disparadores del mismo tipo, pero siempre con sus configuraciones particulares.
 
@@ -61,9 +61,9 @@ Se configura mediante las propiedades siguientes del disparador:
 
 Propiedad | Descripción
 -- | --
-***interval*** | Cada cuánto tiempo se debe ejecutar.
-***immediate*** | ¿La primera ejecución es inmediata? true por defecto.
-***times*** 1 Número de veces que debe ejecutarse. Si no se indica, infinitamente.
+***interval*** | Cada cuánto tiempo se debe ejecutar como, por ejemplo, *1h*, *10m* o *1000s*.
+***immediate*** | ¿La primera ejecución es inmediata? *true* por defecto.
+***times*** | Número de veces que debe ejecutarse. Si no se indica, infinitamente.
 
 Ejemplo:
 
@@ -77,7 +77,7 @@ on:
 
 ## Ejemplo
 
-A continuación, se muestra un ejemplo con el que hacer una copia de seguridad de un determinado archivo cada hora:
+A continuación, se muestra un ejemplo con el que hacer una copia de seguridad de un determinado archivo cada hora si no se especifica otro intervalo explícitamente:
 
 ```yaml
 spec: v1.0
@@ -85,7 +85,8 @@ desc: Realiza una copia de seguridad de un archivo.
 
 dataset:
   - const: interval
-    value: 1h
+    value: $(args.interval)
+    defaultValue: 1h
 
   - const: src
     value: $(args.filePath)
@@ -100,8 +101,14 @@ on:
 defaultJobName: backup
 jobs:
   - macro: backup
-    local: ts
+    local: [ts]
     steps:
-      - $ts = now
+      - $ts = timestamp.now
       - fs.copy $(src) $(dst).$(ts)
+```
+
+Aquí un ejemplo de su ejecución:
+
+```bash
+gattuso t -t interval -a filePath=/mi/archivo.txt -a interval=12h
 ```
