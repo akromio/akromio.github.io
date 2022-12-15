@@ -168,6 +168,35 @@ Ejemplo:
     - exec sudo docker run --name $(attacker.conttainer)$(i) --rm $(attacker.image)
 ```
 
+#### Macros en bucle
+
+Las macros también pueden ejecutarse en bucle para cada valor de una lista.
+Se definen exactamente igual que una macro normal, salvo que añaden el campo ***forEach*** con el que se indica la operación que debe devolver la lista por la que iterar.
+En el ejemplo anterior, se usa la operación ***range*** la cual devuelve una lista con una secuencia de números que van de uno a otro, ambos inclusive.
+Así pues, lo anterior sería lo mismo que lo siguiente:
+
+```yaml
+- macro: create-attackers
+  title: Create the attacker containers
+  ini: exec sudo docker pull $(attacker.image)
+  steps:
+    - exec sudo docker run --name $(attacker.conttainer)1 --rm $(attacker.image)
+    - exec sudo docker run --name $(attacker.conttainer)2 --rm $(attacker.image)
+    - exec sudo docker run --name $(attacker.conttainer)3 --rm $(attacker.image)
+    - exec sudo docker run --name $(attacker.conttainer)4 --rm $(attacker.image)
+    - exec sudo docker run --name $(attacker.conttainer)5 --rm $(attacker.image)
+```
+
+La ejecución de una macro en bucle es como sigue:
+
+01. Se ejecutan las operaciones definidas en el ***ini***, si las hubiera.
+
+02. Se ejecuta la operación definida en el campo ***forEach*** para obtener la lista por la que iterar.
+
+03. Se ejecutan los pasos de la macro una vez para cada elemento de la lista.
+
+04. Se ejecutan las operaciones definidas en el ***fin***, si las hubiera.
+
 ## Pasos
 
 Un **paso** (*step*) no es más que una acción a realizar en una operación compuesta.
