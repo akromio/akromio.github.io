@@ -156,6 +156,18 @@ Y ***fin*** contiene las finales, si fuera necesario.
 En el ejemplo anterior, la macro necesita datos del usuario que deseamos solicitar al usuario.
 Como esos datos son necesarios para el cuerpo de la macro, las añadimos a ***ini***.
 
+Si ***ini*** o ***fin*** contienen un único paso, se puede indicar en línea.
+Ejemplo:
+
+```yaml
+- macro: create-attackers
+  title: Create the attacker containers
+  ini: exec sudo docker pull $(attacker.image)
+  forEach: $i = range 1 5
+  steps:
+    - exec sudo docker run --name $(attacker.conttainer)$(i) --rm $(attacker.image)
+```
+
 ## Pasos
 
 Un **paso** (*step*) no es más que una acción a realizar en una operación compuesta.
