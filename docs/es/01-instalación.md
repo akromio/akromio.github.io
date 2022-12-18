@@ -5,6 +5,7 @@ permalink: /es/instalacion
 
 **Akromio** es una *suite* de automatización desarrollada en **Node.js**, por lo que podemos descargar sus aplicaciones fácilmente del registro **NPM**.
 Podemos hacerlo, manualmente y, en caso de **GitHub Actions**, mediante acciones.
+También hay disponible una imagen en el registro de **Docker**.
 Las aplicaciones disponibles actualmente son:
 
 Aplicación | Paquete | URL | Descripción
@@ -44,6 +45,17 @@ Ejemplo:
 ```yaml
 - name: Set up Gattuso
   uses: akromio/setup-gattuso@v1
+```
+
+## Uso de la imagen de *Docker*
+
+La imagen de **Docker**, **akromio/gattuso**, se encuentra disponible en [https://hub.docker.com/r/akromio/gattuso](https://hub.docker.com/r/akromio/gattuso).
+A continuación, un ejemplo en el que se indica que el registro que debe utilizar es el contenido en el directorio *registry* del directorio actual, el cual se debe montar en la ruta **/registry** del contenedor:
+
+```bash
+# crea un contenedor que ejecute:
+#   gattuso -c udp-flood r attack -a at=1671365957564
+$ sudo docker run --name=udp-attacker5 --network=udp-flood -v $PWD/registry:/registry -id akromio/gattuso:latest gattuso -c udp-flood r attack -a at=1671365957564
 ```
 
 ## Comandos de las aplicaciones
