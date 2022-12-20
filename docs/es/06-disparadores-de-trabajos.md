@@ -101,7 +101,7 @@ on:
 defaultJobName: backup
 jobs:
   - macro: backup
-    local: [ts]
+    dataset: [ts]
     steps:
       - $ts = timestamp.now
       - fs.copy $(src) $(dst).$(ts)
