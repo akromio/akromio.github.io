@@ -52,8 +52,47 @@ dataset:
 
 ### Declaración del conjunto de datos local de una operación
 
-Las operaciones, ya sean simples o compuestas, pueden definir su propio catálogo local.
-Para ello, deben utilizar su **campo *local***, en vez de *dataset*.
+Las operaciones, ya sean simples o compuestas, pueden definir su propio conjunto de datos local.
+Deben hacerlo en su propio campo ***dataset***.
+
+## Declaración de datos
+
+Cada dato se define mediante un elemento objeto en el campo ***dataset***.
+Disponemos de las siguientes posibilidades:
+
+```yaml
+# dato variable
+- var: nombre
+  desc: descripción
+  value: valor a asignar
+  defaultValue: valor predeterminado si value es nulo
+  required: true  # indica si es obligatorio un valor
+  tags: [un, array, de, etiquetas]
+
+# dato constante, no modificable
+- const: nombre
+  desc: descripción
+  value: valor a asignar
+  defaultValue: valor predeterminado si value es nulo
+  tags: [un, array, de, etiquetas]
+```
+
+También es posible añadir datos de tipo entrada que indican que un parámetro pasado en la lista de argumentos.
+En vez de usar ***var*** o ***const***, se usa ***input***.
+Lo siguiente es similar:
+
+```yaml
+# mediante constante
+- const: nombre
+  desc: descripción
+  value: $(args.nombre)
+  tags: [input]
+  required: true
+
+# mediante input
+- input: nombre
+  desc: descripción
+```
 
 ## Acceso al conjunto de datos
 
