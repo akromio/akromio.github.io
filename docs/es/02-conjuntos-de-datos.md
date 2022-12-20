@@ -63,35 +63,37 @@ Disponemos de las siguientes posibilidades:
 ```yaml
 # dato variable
 - var: nombre
-  desc: descripción
   value: valor a asignar
-  defaultValue: valor predeterminado si value es nulo
-  required: true  # indica si es obligatorio un valor
-  tags: [un, array, de, etiquetas]
 
 # dato constante, no modificable
 - const: nombre
-  desc: descripción
   value: valor a asignar
-  defaultValue: valor predeterminado si value es nulo
-  tags: [un, array, de, etiquetas]
 ```
 
-También es posible añadir datos de tipo entrada que indican que un parámetro pasado en la lista de argumentos.
+Los campos que pueden contener las declaraciones son los siguientes:
+
+Campo | Descripción
+-- | --
+***desc*** | Breve descripción del campo.
+***value*** | El valor a asignar. Puede contener expresiones.
+***defaultValue*** | Valor a asignar si ***value*** es nulo.
+***tags*** | Lista de etiquetas asociadas al dato.
+***dataType*** | Tipo de dato esperado:***any***,  ***bool***, ***list***, ***map***, ***num*** o ***text***.
+***options*** | Lista con los posibles valores asignables.
+
+También es posible añadir datos de tipo **entrada** (*input*) que indican que su valor se tomará del argumento homónimo.
 En vez de usar ***var*** o ***const***, se usa ***input***.
 Lo siguiente es similar:
 
 ```yaml
 # mediante constante
 - const: nombre
-  desc: descripción
   value: $(args.nombre)
   tags: [input]
   required: true
 
 # mediante input
 - input: nombre
-  desc: descripción
 ```
 
 ## Acceso al conjunto de datos
