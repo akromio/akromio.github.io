@@ -197,6 +197,12 @@ La ejecución de una macro en bucle es como sigue:
 
 04. Se ejecutan las operaciones definidas en el ***fin***, si las hubiera.
 
+#### Ejecución aleatoria de pasos
+
+En algunas ocasiones, puede ser útil ejecutar los pasos aleatoriamente, por ejemplo, para evitar patrones de ejecución.
+Esto no siempre es posible, pero en algunas ocasiones sí.
+Para este fin, fijaremos la propiedad ***random*** de la macro a ***true***.
+
 ## Pasos
 
 Un **paso** (*step*) no es más que una acción a realizar en una operación compuesta.
