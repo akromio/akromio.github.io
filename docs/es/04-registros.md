@@ -163,7 +163,7 @@ git:///github-registry
 ### Listado de catálogos de un registro de *Git*
 
 Este tipo de registro no soporta esta operación, pero esperamos tenerlo resuelto en el primer trimestre de 2023.
-Puede seguir su evolución en [https://github.com/akromio/nodejs-core/issues/59](https://github.com/akromio/nodejs-core/issues/59).
+Puede seguir su evolución en [https://github.com/akromio/nodejs-akromio/issues/59](https://github.com/akromio/nodejs-akromio/issues/59).
 
 ## Creación de registros
 
