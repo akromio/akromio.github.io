@@ -1,8 +1,7 @@
 ---
-title: Disparadores de trabajos
-permalink: /es/disparadores-de-trabajos
+title: Disparadores
+permalink: /es/disparadores
 ---
-
 
 Los trabajos de un catálogo se pueden ejecutar de manera manual o bien bajo disparadores.
 Un **disparador** (*trigger*) no es más que un componente que tiene la capacidad de ejecutar un trabajo cuando se produce un determinado tipo de evento.
