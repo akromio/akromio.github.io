@@ -1,11 +1,11 @@
 **Documentación en Español**:
 
 01. [Instalación](es/instalacion)
-02. [Conjuntos de datos](es/conjuntos-de-datos)
+02. [Conjuntos de datos](es/datos)
 03. [Catálogos](es/catalogos)
 04. [Registros](es/registros)
-05. [Extensión de catálogos](es/extension-de-catalogos)
-06. [Disparadores de trabajos](es/disparadores-de-trabajos)
+05. [Extensión de catálogos](es/extensiones)
+06. [Disparadores de trabajos](es/disparadores)
 
 *Última actualización*: {{ site.time | date: "%d-%m-%Y %H:%M" }}
 

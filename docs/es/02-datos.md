@@ -1,6 +1,6 @@
 ---
-title: Conjuntos de datos
-permalink: /es/conjuntos-de-datos
+title: Datos
+permalink: /es/datos
 ---
 
 Un **conjunto de datos** (*dataset*) es una colección de datos que podemos usar.
@@ -99,7 +99,7 @@ Lo siguiente es similar:
 ## Acceso al conjunto de datos
 
 **Akromio** permite el uso de expresiones en los campos.
-Estas expresiones pueden contener referencias al conjunto de datos dispoinible mediante la siguiente sintaxis:
+Estas expresiones pueden contener referencias al conjunto de datos disponible mediante la siguiente sintaxis:
 
 ```yaml
 $(variable)
@@ -114,3 +114,58 @@ $(workDir)/.vscode
 
 En un contexto local, el conjunto de datos estará formado por los datos globales y los locales.
 Si lo deseamos, podemos declarar un dato en un contexto local con el mismo nombre que uno global, lo que ocultará el global.
+
+## Argumentos
+
+Un **argumento** (*argumento*) es un dato proporcionado en la línea de comandos o en una variable de entorno.
+Se acceden en el catálogo mediante la constante ***args*** como, por ejemplo:
+
+```yaml
+value: $(args.nombre)
+```
+
+### Argumentos en la línea de comandos
+
+Desde la línea de comandos, se utiliza la opción ***-a*** con uno de los siguientes formatos:
+
+```
+-a nombre=valor
+-a archivo.yaml
+-a archivo.json
+```
+
+Cuando se indica un archivo, este deberá ser un objeto o mapa, donde cada una de sus propiedades se considera un argumento.
+Se debe indicar la extensión del archivo para así determinar en qué formato se encuentra el archivo.
+
+Se puede indicar tantas opciones ***-a*** como sea necesario.
+
+### Argumentos mediante variables de entorno
+
+También es posible definir argumentos mediante variables de entorno.
+Toda variable de entorno que comience por **KRM_ARG_** se considerará un argumento que se añadirá automáticamente a ***args***:
+
+```
+KRM_ARG_nombre=valor
+```
+
+El nombre del argumento sigue al prefijo indicado y su valor será el de la variable de entorno.
+
+### Valores codificados
+
+Cuando se utiliza una opción ***-a nombre=valor*** o una variable de entorno ***KRM_ARG_nombre=valor***, el valor puede precederse por el formato en el que se encuentra codificado.
+Así, se pueden pasar valores compuestos como, por ejemplo, listas u objetos.
+Para ello, es necesario que el valor esté precedido por los siguientes indicadores de protocolo:
+
+Prefijo | Descripción
+-- | --
+***json://*** | Codificado en **JSON**.
+***json+base64://*** | Codificado en **JSON** y su resultado en **base64**.
+
+La segunda opción se recomienda cuando el valor puede contener espacios, si no los contiene, no hace falta.
+Esto es muy útil cuando se despliega **Akromio** en un contenedor y se configura mediante variables de entorno.
+
+Ejemplo:
+
+```
+KRM_ARG_lista=json://[1,2,3,4]
+```
