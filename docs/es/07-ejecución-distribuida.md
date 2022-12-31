@@ -1,6 +1,6 @@
 ---
 title: Ejecución distribuida
-permalink: /es/ejecución-distribuida
+permalink: /es/ejecucion-distribuida
 ---
 
 **Akromio** se ha desarrollado tanto para su ejecución local como distribuida.
