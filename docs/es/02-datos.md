@@ -166,6 +166,23 @@ Esto es muy útil cuando se despliega **Akromio** en un contenedor y se configur
 
 Ejemplo:
 
+```bash
+export KRM_ARG_lista=json://[1,2,3,4]
 ```
-KRM_ARG_lista=json://[1,2,3,4]
+
+Si dispone de un archivo local de argumentos, puede obtener sus representaciones en **json** o **json+base64** con el comando ***encode*** de las aplicaciones de la suite como, por ejemplo:
+
+```bash
+$ carboni encode args.yaml -x
+export KRM_ARG_pauseDuration=json+base64://IjMwcyI=
+export KRM_ARG_botnet=json+base64://eyJpbXBsIjoiY29uc29sZSIsImJvdHMiOlt7ImJvdCI6ImNhdmFuaTEifSx7ImJvdCI6ImNhdmFuaTIifSx7ImJvdCI6ImNhdmFuaTMifV19
 ```
+
+Si necesita sólo uno de los argumentos, utilice la opción ***-p*** para indicar qué propiedad del archivo desea transformar:
+
+```bash
+$ carboni encode args.yaml -p botnet -x
+export KRM_ARG_botnet=json+base64://eyJpbXBsIjoiY29uc29sZSIsImJvdHMiOlt7ImJvdCI6ImNhdmFuaTEifSx7ImJvdCI6ImNhdmFuaTIifSx7ImJvdCI6ImNhdmFuaTMifV19
+```
+
+La opción ***-x***  indica que prefije la salida con ***export*** para facilitar el copia y pega.
