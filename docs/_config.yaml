@@ -7,7 +7,7 @@ brand:
   name: Akromio
   author: Sia Codelabs
 ws:
-  year: 2022
+  year: 2022-2023
 
 remote_theme: jekyll/minima
 minima:
