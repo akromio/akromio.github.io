@@ -416,6 +416,25 @@ Pero lo siguiente también sería posible:
 $ carboni r pause warmup load -L -a args.yaml
 ```
 
+### Identificador de *Carboni*
+
+La opción ***--name*** (o ***-n***) permite fijar un nombre personalizado para la instancia de **Carboni** en ejecución.
+Este nombre se utiliza para fijar el de la conexión de **Redis** y, así, poder localizar más fácilmente las conexiones abiertas por **Carboni** con el comando **CLIENT LIST**.
+
+Por ejemplo, si lanzamos la siguiente ejecución:
+
+```bash
+$ carboni r pause warmup load -a args.yaml -n test-carboni
+```
+
+Podremos ver algo similar a lo siguiente en nuestro **Redis**:
+
+```bash
+$ redis-cli CLIENT LIST
+id=52 addr=172.17.0.1:59754 laddr=172.17.0.2:6379 fd=8 name=test-carboni age=2 idle=0 flags=N db=0 sub=0 psub=0 ssub=0 multi=-1 qbuf=0 qbuf-free=20474 argv-mem=0 multi-mem=0 rbs=1024 rbp=22 obl=0 oll=0 omem=0 tot-mem=22272 events=r cmd=xadd user=default redir=-1 resp=2
+id=54 addr=172.17.0.1:39374 laddr=172.17.0.2:6379 fd=9 name= age=0 idle=0 flags=N db=0 sub=0 psub=0 ssub=0 multi=-1 qbuf=26 qbuf-free=20448 argv-mem=10 multi-mem=0 rbs=16384 rbp=16384 obl=0 oll=0 omem=0 tot-mem=37658 events=r cmd=client|list user=default redir=-1 resp=2
+```
+
 ## Cavani
 
 Bajo desarrollo.
