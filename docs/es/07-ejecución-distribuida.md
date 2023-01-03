@@ -435,6 +435,14 @@ id=52 addr=172.17.0.1:59754 laddr=172.17.0.2:6379 fd=8 name=test-carboni age=2 i
 id=54 addr=172.17.0.1:39374 laddr=172.17.0.2:6379 fd=9 name= age=0 idle=0 flags=N db=0 sub=0 psub=0 ssub=0 multi=-1 qbuf=26 qbuf-free=20448 argv-mem=10 multi-mem=0 rbs=16384 rbp=16384 obl=0 oll=0 omem=0 tot-mem=37658 events=r cmd=client|list user=default redir=-1 resp=2
 ```
 
+### Constructor de catálogos de fases
+
+Podemos construir un catálogo de fases fácilmente mediante el siguiente comando:
+
+```bash
+$ gattuso -g git -c stage r create
+```
+
 ## Cavani
 
 Bajo desarrollo.

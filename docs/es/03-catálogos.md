@@ -141,10 +141,10 @@ Vamos a ver un ejemplo ilustrativo:
 - macro: create
   title: Create new job catalog
   ini:
-    - quiet: $answers = inquire $(newJobCatalogQ) $(answers)
+    - quiet: $answers = inquire $(createQ) $(answers)
   steps:
     - fs.createDir $(dst)
-    - quiet: $item = cr.getItem $(src)/job-catalog.yaml.hbs
+    - quiet: $item = cr.getItem $(src)/catalog.yaml.hbs
     - quiet: $content = hbs.render $(item.value) $(answers)
     - file.write $(content) $(dst)/$(answers.name).yaml
 ```
@@ -262,4 +262,12 @@ Ejemplo:
 
 ```yaml
 if: platform == 'linux'
+```
+
+## Constructor de un catálogo de trabajos
+
+Podemos construir un catálogo de trabajos fácilmente mediante el siguiente comando:
+
+```bash
+$ gattuso -g git -c job r create
 ```
