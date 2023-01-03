@@ -48,9 +48,10 @@ $ gattuso -g fs:///home/me/SiaCodelabs/Akromio/builtin-registry/registry g
 ----------------------------------------------------------------
  editorconfig  Catalog for working with the .editorconfig file. 
  empty         Empty catalog for checking global dataset.       
- job-catalog   Catalog for working with Akromio job catalogs.   
+ job           Catalog for working with job catalogs.   
  plugin        Catalog for working Akromio plugins.             
  registry      Catalog for working with Akromio registries.     
+ stage         Catalog for working with stage catalogs.
  vscode        Catalog for working with Visual Studio Code.     
 
 me@ubu:/tmp/akromio$ 
