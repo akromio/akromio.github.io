@@ -7,6 +7,8 @@ Los trabajos de un catálogo se pueden ejecutar de manera manual o bien bajo dis
 Un **disparador** (*trigger*) no es más que un componente que tiene la capacidad de ejecutar un trabajo cuando se produce un determinado tipo de evento.
 Un **evento** (*event*) es algo acaecido en el sistema y que tiene la capacidad de disparar o producir la ejecución de trabajos.
 
+La ejecución dirigida por eventos recae en **Cavani**.
+
 ## Propiedad *on* de los catálogos
 
 Estos disparadores se definen mediante la propiedad ***on*** del catálogo.
@@ -23,35 +25,34 @@ on:
     impl: interval    # si no se indica, se usa el identificador
 ```
 
-## Comando *trigger*
+## Comando *cavani run*
 
-mediante el comando **trigger** (o **t**) solicitamos la ejecución de un trabajo mediante un disparador.
-En vez de usar **run**, debemos usar **trigger**.
+Mediante el comando **cavani run** (o **cavani r**) solicitamos la ejecución de un trabajo mediante un disparador.
 
 Ejemplos:
 
 ```bash
 # ejecuta el trabajo predeterminado
 # bajo el disparador predeterminado
-gattuso t
+cavani r
 
 # ejecuta el trabajo indicado
 # bajo el disparador predeterminado
-gattuso t trabajo
+cavani r trabajo
 
 # ejecuta el trabajo predeterminado
 # bajo el disparador indicado
-gattuso -t disparador t
+cavani r -t disparador
 
 # ejecuta el trabajo indicado
 # bajo el disparador indicado
-gattuso -t disparador t trabajo
+cavani r trabajo -t disparador
 ```
 
 Recuerde que, cuando deseamos usar un disparador específico, se utiliza la opción ***-t***.
-El trabajo siempre sin opción, para ser consistentes con el comando **run**.
+El trabajo siempre sin opción, para ser consistentes con el comando **gattuso run**.
 
-Se puede pasar argumentos al trabajo a ejecutar con la opción **-a**, al igual que con el comando **run**.
+Se puede pasar argumentos al trabajo a ejecutar con la opción **-a**, al igual que con el comando **gattuso run**.
 
 ## Disparador a intervalos
 
@@ -109,5 +110,5 @@ jobs:
 Aquí un ejemplo de su ejecución:
 
 ```bash
-gattuso t -t interval -a filePath=/mi/archivo.txt -a interval=12h
+cavani r -t interval -a filePath=/mi/archivo.txt -a interval=12h
 ```
