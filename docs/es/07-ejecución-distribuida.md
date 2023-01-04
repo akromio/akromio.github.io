@@ -445,4 +445,4 @@ $ gattuso -g git -c stage r create
 
 ## Cavani
 
-Bajo desarrollo.
+Bajo desarrollo el soporte de **Cavani** para leer solicitudes de trabajo de un flujo de **Redis Streams** y procesarlos.

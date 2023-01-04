@@ -12,7 +12,7 @@ Aplicación | Paquete | URL | Descripción
 -- | -- | -- | --
 **gattuso** | **@akromio/gattuso** | [https://www.npmjs.com/package/@akromio/gattuso](https://www.npmjs.com/package/@akromio/gattuso) | Automatización de propósito general.
 **carboni** | **@akromio/carboni** | [https://www.npmjs.com/package/@akromio/carboni](https://www.npmjs.com/package/@akromio/carboni) | Generador y distribuidor de solicitudes de ejecución a agentes **Cavani**.
-**cavani** | **@akromio/cavani** | Bajo desarrollo | Agente de ejecución en un entorno distribuido.
+**cavani** | **@akromio/cavani** | [https://www.npmjs.com/package/@akromio/cavani](https://www.npmjs.com/package/@akromio/cavani) | Agente de ejecución en un entorno distribuido.
 
 ## Requisitos
 
@@ -27,7 +27,7 @@ Aplicación | Comando de instalación
 -- | --
 **gattuso** | `npm i -g @akromio/gattuso`
 **carboni** | `npm i -g @akromio/carboni`
-**cavani** | En desarrollo
+**cavani** | `npm i -g @akromio/cavani`
 
 Después de la instalación, es buena práctica comprobar que tenemos acceso a las aplicaciones instaladas mostrando su ayuda o su versión, por ejemplo:
 
@@ -43,17 +43,12 @@ Para **GitHub Actions**, están disponibles las siguientes acciones:
 Aplicación | Acción | URL
 -- | -- | --
 **gattuso** | `akromio/setup-gattuso` | [https://github.com/marketplace/actions/setup-gattuso](https://github.com/marketplace/actions/setup-gattuso)
-**carboni** | `akromio/setup-carboni` | [https://github.com/marketplace/actions/setup-carboni](https://github.com/marketplace/actions/setup-carboni)
-**cavani** | Bajo desarrollo | -
 
 Ejemplo:
 
 ```yaml
 - name: Set up Gattuso
   uses: akromio/setup-gattuso@v1
-
-- name: Set up Carboni
-  uses: akromio/setup-carboni@v1
 ```
 
 ## Uso de la imagen de *Docker*
@@ -64,7 +59,7 @@ Imagen | URL
 -- | --
 **akromio/gattuso** | [https://hub.docker.com/r/akromio/gattuso](https://hub.docker.com/r/akromio/gattuso)
 **akromio/carboni** | [https://hub.docker.com/r/akromio/carboni](https://hub.docker.com/r/akromio/carboni)
-**akromio/cavani** | Bajo desarrollo
+**akromio/cavani** | [https://hub.docker.com/r/akromio/cavani](https://hub.docker.com/r/akromio/cavani)
 
 
 A continuación, un ejemplo en el que se indica que el registro que debe utilizar es el contenido en el directorio *registry* del directorio actual, el cual se debe montar en la ruta **/registry** del contenedor:
@@ -85,10 +80,12 @@ Para conocer las variables de entorno utilizadas por **Akromio**, podemos utiliz
 # lista todas las variables de entorno
 gattuso e
 carboni e
+cavani e
 
 # lista la variable de entorno indicada
 gattuso e VARIABLE
 carboni e VARIABLE
+cavani e VARIABLE
 ```
 
 ### Información del sistema
