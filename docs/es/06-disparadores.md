@@ -23,6 +23,8 @@ Ejemplo:
 on:
   - trigger: interval # nombre para identificar el disparador
     impl: interval    # si no se indica, se usa el identificador
+    job: nombre       # nombre del trabajo a ejecutar
+    args: valor       # argumentos a pasar al trabajo a ejecutar
 ```
 
 ## Comando *cavani run*
@@ -32,25 +34,12 @@ Mediante el comando **cavani run** (o **cavani r**) solicitamos la ejecución de
 Ejemplos:
 
 ```bash
-# ejecuta el trabajo predeterminado
-# bajo el disparador predeterminado
+# ejecuta el disparador predeterminado
 cavani r
 
-# ejecuta el trabajo indicado
-# bajo el disparador predeterminado
-cavani r trabajo
-
-# ejecuta el trabajo predeterminado
-# bajo el disparador indicado
-cavani r -t disparador
-
-# ejecuta el trabajo indicado
-# bajo el disparador indicado
-cavani r trabajo -t disparador
+# ejecuta el disparador indicado
+cavani r disparador
 ```
-
-Recuerde que, cuando deseamos usar un disparador específico, se utiliza la opción ***-t***.
-El trabajo siempre sin opción, para ser consistentes con el comando **gattuso run**.
 
 Se puede pasar argumentos al trabajo a ejecutar con la opción **-a**, al igual que con el comando **gattuso run**.
 
@@ -64,6 +53,8 @@ Propiedad | Descripción
 ***interval*** | Cada cuánto tiempo se debe ejecutar como, por ejemplo, *1h*, *10m* o *1000s*.
 ***immediate*** | ¿La primera ejecución es inmediata? *true* por defecto.
 ***times*** | Número de veces que debe ejecutarse. Si no se indica, infinitamente.
+***job*** | Nombre del trabajo a ejecutar.
+***args*** | Argumentos a pasar, si es necesario, al trabajo.
 
 Ejemplo:
 
@@ -71,8 +62,8 @@ Ejemplo:
 on:
   - trigger: cada-hora
     impl: interval
-    desc: Genera el evento cada hora.
     interval: 1h
+    job: backup
 ```
 
 ## Ejemplo
@@ -97,8 +88,8 @@ dataset:
 on:
   - trigger: interval
     interval: $(interval)
+    job: backup
 
-defaultJobName: backup
 jobs:
   - macro: backup
     dataset: [ts]
@@ -110,5 +101,5 @@ jobs:
 Aquí un ejemplo de su ejecución:
 
 ```bash
-cavani r -t interval -a filePath=/mi/archivo.txt -a interval=12h
+cavani r interval -a filePath=/mi/archivo.txt -a interval=12h
 ```

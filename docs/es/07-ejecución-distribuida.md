@@ -64,7 +64,6 @@ stages:
 ### Fases
 
 Una **fase** (*stage*) representa un período de tiempo durante el cual se generan peticiones de ejecución de trabajo.
-Actualmente, se soportan los siguientes tipos de fases: las de pausa o descanso, las constantes y las incrementales.
 
 He aquí un ejemplo ilustrativo:
 
@@ -97,9 +96,7 @@ stages:
       duration: 1s
       requests: 5
     jobs:
-      - registry: git:///performance
-        catalog: webservice
-        job: web
+      - job: web
         weight: 100
 
   - inc: load
@@ -110,20 +107,17 @@ stages:
       requests: 200
       inc: 2.5
     jobs:
-      - registry: git:///performance
-        catalog: webservice
-        job: web
+      - job: web
         weight: 50
       
-      - registry: git:///performance
-        catalog: webservice
-        job: android
+      - job: android
         weight: 30
       
-      - registry: git:///performance
-        catalog: webservice
-        job: ios
+      - job: ios
         weight: 20
+  
+  - exit: exit
+    duration: 2s
 ```
 
 #### Fase de pausa o descanso
@@ -162,9 +156,7 @@ Veamos el formato de este tipo de fases antes de continuar:
     duration: duración  # duración del intervalo; ejemplos: 1s, 2s, 1m
     requests: número    # número de solicitudes de ejecución a generar por intervalo
   jobs:
-    - registry: nombre  # registro donde se encuentra el catálogo de trabajos
-      catalog: nombre   # catálogo a utilizar
-      job: nombre       # trabajo a ejecutar
+    - job: nombre       # trabajo a ejecutar
       args: dato        # argumentos a pasar al trabajo a ejecutar
       weight: peso      # porcentaje de peticiones que deben ser de este trabajo
     
@@ -197,6 +189,25 @@ jobs:
   # ...
 ```
 
+#### Fase de terminación
+
+La **fase de terminación** (*exit stage*) es aquella que solicita a la botnet que terminen su ejecución.
+Consiste en enviar un mensaje especial de terminación a cada *bot* indicándole que termine su ejecución.
+Si se encuentra en un contenedor, este finalizará.
+
+Ejemplo:
+
+```yaml
+- exit: exit
+  duration: 2s
+```
+
+La duración es lo que tardará **Carboni** en enviar la solicitud de terminación a los *bots*.
+Como un periodo adicional para dejar que terminen lo que están haciendo.
+
+Si estos mensajes no se envían, los *bots* no terminarán y se quedarán a la espera de que les lleguen más trabajos.
+Por lo general, en una prueba de rendimiento, lo ideal es enviar este mensaje.
+
 #### *Botnet*
 
 Una ***botnet*** es una colección de agentes (*bots*) que se encargarán de ejecutar las peticiones generadas por **Carboni**.
@@ -210,7 +221,7 @@ En caso de no indicarse, se usará el argumento *botnet*.
 
 Para cada botnet, hay que indicar:
 
-- El tipo de botnet: **redis**.
+- El tipo de botnet: **redisstreams**.
 
 - Los miembros de la *botnet*, o sea, los identificadores de los agentes asociados a la *botnet*.
 
@@ -232,9 +243,7 @@ stages:
       duration: 1s
       requests: 5
     jobs:
-      - registry: git:///performance
-        catalog: webservice
-        job: web
+      - job: web
         weight: 100
 
   - inc: load
@@ -245,19 +254,13 @@ stages:
       requests: 1
       inc: 0.5
     jobs:
-      - registry: git:///performance
-        catalog: webservice
-        job: web
+      - job: web
         weight: 50
       
-      - registry: git:///performance
-        catalog: webservice
-        job: android
+      - job: android
         weight: 30
       
-      - registry: git:///performance
-        catalog: webservice
-        job: ios
+      - job: ios
         weight: 20
 ```
 
@@ -271,7 +274,7 @@ Vamos cómo ejecutarlo desde nuestra máquina local:
 # fijamos el argumento botnet como variable de entorno
 $ cat args.yaml
 botnet:
-  impl: redis
+  impl: redisstreams
   host: localhost
   port: 6379
   bots:
@@ -285,59 +288,58 @@ $ export KRM_ARG_botnet=json+base64://eyJpbXBsIjoicmVkaXMiLCJob3N0IjoibG9jYWxob3
 # ejecutamos las fases que deseamos del catálogo
 $ carboni r -L pause warmup load
 Stage: pause (duration: 10s)
-Stage: warmup (duration: 10s)
-[2023-01-02T10:26:04.602Z] cavani1 ts:1672655164601 assignTs:1672655164602 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:04.603Z] cavani2 ts:1672655164601 assignTs:1672655164602 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:04.603Z] cavani3 ts:1672655164601 assignTs:1672655164602 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:04.603Z] cavani1 ts:1672655164601 assignTs:1672655164602 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:04.603Z] cavani2 ts:1672655164601 assignTs:1672655164602 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:05.605Z] cavani3 ts:1672655165601 assignTs:1672655165603 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:05.606Z] cavani1 ts:1672655165602 assignTs:1672655165604 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:05.607Z] cavani2 ts:1672655165602 assignTs:1672655165604 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:05.607Z] cavani3 ts:1672655165602 assignTs:1672655165604 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:05.608Z] cavani1 ts:1672655165602 assignTs:1672655165605 registry:git:///performance catalog:webservice job:web
+Stage: warmup (duration: 10s)[2023-01-02T10:26:04.602Z] cavani1 ts:1672655164601 assignTs:1672655164602  job:web
+[2023-01-02T10:26:04.603Z] cavani2 ts:1672655164601 assignTs:1672655164602 job:web
+[2023-01-02T10:26:04.603Z] cavani3 ts:1672655164601 assignTs:1672655164602 job:web
+[2023-01-02T10:26:04.603Z] cavani1 ts:1672655164601 assignTs:1672655164602 job:web
+[2023-01-02T10:26:04.603Z] cavani2 ts:1672655164601 assignTs:1672655164602 job:web
+[2023-01-02T10:26:05.605Z] cavani3 ts:1672655165601 assignTs:1672655165603 job:web
+[2023-01-02T10:26:05.606Z] cavani1 ts:1672655165602 assignTs:1672655165604 job:web
+[2023-01-02T10:26:05.607Z] cavani2 ts:1672655165602 assignTs:1672655165604 job:web
+[2023-01-02T10:26:05.607Z] cavani3 ts:1672655165602 assignTs:1672655165604 job:web
+[2023-01-02T10:26:05.608Z] cavani1 ts:1672655165602 assignTs:1672655165605 job:web
 ...
-[2023-01-02T10:26:12.611Z] cavani2 ts:1672655172609 assignTs:1672655172610 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:12.611Z] cavani3 ts:1672655172609 assignTs:1672655172610 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:12.611Z] cavani1 ts:1672655172609 assignTs:1672655172610 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:12.611Z] cavani2 ts:1672655172610 assignTs:1672655172610 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:12.612Z] cavani3 ts:1672655172610 assignTs:1672655172610 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:13.614Z] cavani1 ts:1672655173611 assignTs:1672655173612 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:13.615Z] cavani2 ts:1672655173611 assignTs:1672655173612 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:13.615Z] cavani3 ts:1672655173611 assignTs:1672655173612 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:13.615Z] cavani1 ts:1672655173611 assignTs:1672655173612 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:13.615Z] cavani2 ts:1672655173611 assignTs:1672655173613 registry:git:///performance catalog:webservice job:web
+[2023-01-02T10:26:12.611Z] cavani2 ts:1672655172609 assignTs:1672655172610 job:web
+[2023-01-02T10:26:12.611Z] cavani3 ts:1672655172609 assignTs:1672655172610 job:web
+[2023-01-02T10:26:12.611Z] cavani1 ts:1672655172609 assignTs:1672655172610 job:web
+[2023-01-02T10:26:12.611Z] cavani2 ts:1672655172610 assignTs:1672655172610 job:web
+[2023-01-02T10:26:12.612Z] cavani3 ts:1672655172610 assignTs:1672655172610 job:web
+[2023-01-02T10:26:13.614Z] cavani1 ts:1672655173611 assignTs:1672655173612 job:web
+[2023-01-02T10:26:13.615Z] cavani2 ts:1672655173611 assignTs:1672655173612 job:web
+[2023-01-02T10:26:13.615Z] cavani3 ts:1672655173611 assignTs:1672655173612 job:web
+[2023-01-02T10:26:13.615Z] cavani1 ts:1672655173611 assignTs:1672655173612 job:web
+[2023-01-02T10:26:13.615Z] cavani2 ts:1672655173611 assignTs:1672655173613 job:web
 Stage: load (duration: 10s)
-[2023-01-02T10:26:14.621Z] cavani1 ts:1672655174620 assignTs:1672655174620 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:15.621Z] cavani2 ts:1672655175621 assignTs:1672655175621 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:16.622Z] cavani3 ts:1672655176622 assignTs:1672655176622 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:16.622Z] cavani1 ts:1672655176622 assignTs:1672655176622 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:17.623Z] cavani2 ts:1672655177623 assignTs:1672655177623 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:17.623Z] cavani3 ts:1672655177623 assignTs:1672655177623 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:18.624Z] cavani1 ts:1672655178624 assignTs:1672655178624 registry:git:///performance catalog:webservice job:android
-[2023-01-02T10:26:18.624Z] cavani2 ts:1672655178624 assignTs:1672655178624 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:18.624Z] cavani3 ts:1672655178624 assignTs:1672655178624 registry:git:///performance catalog:webservice job:ios
-[2023-01-02T10:26:19.625Z] cavani1 ts:1672655179624 assignTs:1672655179624 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:19.625Z] cavani2 ts:1672655179624 assignTs:1672655179625 registry:git:///performance catalog:webservice job:android
-[2023-01-02T10:26:19.625Z] cavani3 ts:1672655179624 assignTs:1672655179625 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:20.627Z] cavani1 ts:1672655180625 assignTs:1672655180626 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:20.627Z] cavani2 ts:1672655180626 assignTs:1672655180626 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:20.628Z] cavani3 ts:1672655180626 assignTs:1672655180626 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:20.628Z] cavani1 ts:1672655180626 assignTs:1672655180627 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:21.629Z] cavani2 ts:1672655181627 assignTs:1672655181628 registry:git:///performance catalog:webservice job:android
-[2023-01-02T10:26:21.630Z] cavani3 ts:1672655181627 assignTs:1672655181629 registry:git:///performance catalog:webservice job:android
-[2023-01-02T10:26:21.630Z] cavani1 ts:1672655181627 assignTs:1672655181629 registry:git:///performance catalog:webservice job:android
-[2023-01-02T10:26:21.630Z] cavani2 ts:1672655181627 assignTs:1672655181629 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:22.630Z] cavani3 ts:1672655182629 assignTs:1672655182630 registry:git:///performance catalog:webservice job:ios
-[2023-01-02T10:26:22.630Z] cavani1 ts:1672655182629 assignTs:1672655182630 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:22.630Z] cavani2 ts:1672655182629 assignTs:1672655182630 registry:git:///performance catalog:webservice job:android
-[2023-01-02T10:26:22.630Z] cavani3 ts:1672655182629 assignTs:1672655182630 registry:git:///performance catalog:webservice job:android
-[2023-01-02T10:26:22.631Z] cavani1 ts:1672655182629 assignTs:1672655182630 registry:git:///performance catalog:webservice job:android
-[2023-01-02T10:26:23.632Z] cavani2 ts:1672655183631 assignTs:1672655183631 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:23.632Z] cavani3 ts:1672655183631 assignTs:1672655183632 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:23.632Z] cavani1 ts:1672655183631 assignTs:1672655183632 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:23.632Z] cavani2 ts:1672655183631 assignTs:1672655183632 registry:git:///performance catalog:webservice job:web
-[2023-01-02T10:26:23.632Z] cavani3 ts:1672655183631 assignTs:1672655183632 registry:git:///performance catalog:webservice job:ios
+[2023-01-02T10:26:14.621Z] cavani1 ts:1672655174620 assignTs:1672655174620 job:web
+[2023-01-02T10:26:15.621Z] cavani2 ts:1672655175621 assignTs:1672655175621 job:web
+[2023-01-02T10:26:16.622Z] cavani3 ts:1672655176622 assignTs:1672655176622 job:web
+[2023-01-02T10:26:16.622Z] cavani1 ts:1672655176622 assignTs:1672655176622 job:web
+[2023-01-02T10:26:17.623Z] cavani2 ts:1672655177623 assignTs:1672655177623 job:web
+[2023-01-02T10:26:17.623Z] cavani3 ts:1672655177623 assignTs:1672655177623 job:web
+[2023-01-02T10:26:18.624Z] cavani1 ts:1672655178624 assignTs:1672655178624 job:android
+[2023-01-02T10:26:18.624Z] cavani2 ts:1672655178624 assignTs:1672655178624 job:web
+[2023-01-02T10:26:18.624Z] cavani3 ts:1672655178624 assignTs:1672655178624 job:ios
+[2023-01-02T10:26:19.625Z] cavani1 ts:1672655179624 assignTs:1672655179624 job:web
+[2023-01-02T10:26:19.625Z] cavani2 ts:1672655179624 assignTs:1672655179625 job:android
+[2023-01-02T10:26:19.625Z] cavani3 ts:1672655179624 assignTs:1672655179625 job:web
+[2023-01-02T10:26:20.627Z] cavani1 ts:1672655180625 assignTs:1672655180626 job:web
+[2023-01-02T10:26:20.627Z] cavani2 ts:1672655180626 assignTs:1672655180626 job:web
+[2023-01-02T10:26:20.628Z] cavani3 ts:1672655180626 assignTs:1672655180626 job:web
+[2023-01-02T10:26:20.628Z] cavani1 ts:1672655180626 assignTs:1672655180627 job:web
+[2023-01-02T10:26:21.629Z] cavani2 ts:1672655181627 assignTs:1672655181628 job:android
+[2023-01-02T10:26:21.630Z] cavani3 ts:1672655181627 assignTs:1672655181629 job:android
+[2023-01-02T10:26:21.630Z] cavani1 ts:1672655181627 assignTs:1672655181629 job:android
+[2023-01-02T10:26:21.630Z] cavani2 ts:1672655181627 assignTs:1672655181629 job:web
+[2023-01-02T10:26:22.630Z] cavani3 ts:1672655182629 assignTs:1672655182630 job:ios
+[2023-01-02T10:26:22.630Z] cavani1 ts:1672655182629 assignTs:1672655182630 job:web
+[2023-01-02T10:26:22.630Z] cavani2 ts:1672655182629 assignTs:1672655182630 job:android
+[2023-01-02T10:26:22.630Z] cavani3 ts:1672655182629 assignTs:1672655182630 job:android
+[2023-01-02T10:26:22.631Z] cavani1 ts:1672655182629 assignTs:1672655182630 job:android
+[2023-01-02T10:26:23.632Z] cavani2 ts:1672655183631 assignTs:1672655183631 job:web
+[2023-01-02T10:26:23.632Z] cavani3 ts:1672655183631 assignTs:1672655183632 job:web
+[2023-01-02T10:26:23.632Z] cavani1 ts:1672655183631 assignTs:1672655183632 job:web
+[2023-01-02T10:26:23.632Z] cavani2 ts:1672655183631 assignTs:1672655183632 job:web
+[2023-01-02T10:26:23.632Z] cavani3 ts:1672655183631 assignTs:1672655183632 job:ios
 ```
 
 Observe que durante la fase de pausa, no se generan solicitudes de ejecución.
@@ -393,7 +395,7 @@ La configuración de **Redis** se indica en la *botnet* como sigue:
 
 ```json
 {
-  "impl": "redis",
+  "impl": "redisstreams",
   "host": "localhost",
   "port": 6379,
   "bots": [
@@ -424,7 +426,7 @@ Este nombre se utiliza para fijar el de la conexión de **Redis** y, así, poder
 Por ejemplo, si lanzamos la siguiente ejecución:
 
 ```bash
-$ carboni r pause warmup load -a args.yaml -n test-carboni
+$ carboni r pause warmup load exit -a args.yaml -n test-carboni
 ```
 
 Podremos ver algo similar a lo siguiente en nuestro **Redis**:
@@ -445,4 +447,45 @@ $ gattuso -g git -c stage r create
 
 ## Cavani
 
-Bajo desarrollo el soporte de **Cavani** para leer solicitudes de trabajo de un flujo de **Redis Streams** y procesarlos.
+**Cavani** es la aplicación para la ejecución basada en eventos.
+Ya hemos visto el evento planificado que permite ejecutar un trabajo a intervalos.
+Otra posibilidad son los eventos recibidos a través de un flujo de **Redis Streams** generado por **Carboni**.
+
+Este tipo de evento se configura como sigue:
+
+```yaml
+on:
+  - trigger: nombre
+    impl: redisstreams
+    host: servidor de Redis
+    port: puerto en el que escucha Redis
+    username: nombre de usuario si es necesario
+    password: contraseña si se usa usuario
+    stream: flujo del que leer
+    group: grupo de consumidores
+    consumer: identificador de la instancia de Cavani
+```
+
+Ejemplo:
+
+```yaml
+on:
+  - trigger: botnet
+    impl: redisstreams
+    host: krm-redis
+    port: 6379
+    stream: cavani
+    group: cavani-botnet
+    consumer: cavani1
+```
+
+Cuando se ejecuta **Cavani** hay que indicarle el catálogo en el que se encuentran los trabajos que debe ejecutar y el disparador de **Redis Streams**.
+Ejemplo:
+
+```bash
+$ cavani -g fs:///mi/registro -c mi-catálogo r disparador
+```
+
+Si no se indica el disparador, se usará el predeterminado, o sea, el indicado por la propiedad ***defaultTriggerName*** del catálogo.
+
+Un catálogo de trabajos de **Cavani** es legible sin problemas por **Gattuso**, exceptuando que las propiedades específicas como, por ejemplo, ***defaultTriggerName*** u ***on*** no las tendrá en cuenta.
