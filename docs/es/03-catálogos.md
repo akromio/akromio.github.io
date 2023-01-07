@@ -165,7 +165,7 @@ Ejemplo:
   ini: exec sudo docker pull $(attacker.image)
   forEach: $i = range 1 5
   steps:
-    - exec sudo docker run --name $(attacker.conttainer)$(i) --rm $(attacker.image)
+    - sudo: docker run --name $(attacker.conttainer)$(i) --rm $(attacker.image)
 ```
 
 #### Macros en bucle
@@ -180,11 +180,11 @@ Así pues, lo anterior sería lo mismo que lo siguiente:
   title: Create the attacker containers
   ini: exec sudo docker pull $(attacker.image)
   steps:
-    - exec sudo docker run --name $(attacker.conttainer)1 --rm $(attacker.image)
-    - exec sudo docker run --name $(attacker.conttainer)2 --rm $(attacker.image)
-    - exec sudo docker run --name $(attacker.conttainer)3 --rm $(attacker.image)
-    - exec sudo docker run --name $(attacker.conttainer)4 --rm $(attacker.image)
-    - exec sudo docker run --name $(attacker.conttainer)5 --rm $(attacker.image)
+    - sudo: docker run --name $(attacker.conttainer)1 --rm $(attacker.image)
+    - sudo: docker run --name $(attacker.conttainer)2 --rm $(attacker.image)
+    - sudo: docker run --name $(attacker.conttainer)3 --rm $(attacker.image)
+    - sudo: docker run --name $(attacker.conttainer)4 --rm $(attacker.image)
+    - sudo: docker run --name $(attacker.conttainer)5 --rm $(attacker.image)
 ```
 
 La ejecución de una macro en bucle es como sigue:
@@ -241,6 +241,14 @@ Sintaxis:
 
 # paso que muestra su log
 - log: pasoTextualOEnLista
+
+# paso que ejecuta la operación exec
+# como, por ejemplo, exec redis-cli ping
+- run: pasoTextual
+
+# paso que ejecuta la operación exec sudo
+# como, por ejemplo, exec sudo docker ps
+- sudo: pasoTextual
 ```
 
 ### Pasos condicionales
