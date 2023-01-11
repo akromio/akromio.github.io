@@ -489,3 +489,26 @@ $ cavani -g fs:///mi/registro -c mi-catálogo r disparador
 Si no se indica el disparador, se usará el predeterminado, o sea, el indicado por la propiedad ***defaultTriggerName*** del catálogo.
 
 Un catálogo de trabajos de **Cavani** es legible sin problemas por **Gattuso**, exceptuando que las propiedades específicas como, por ejemplo, ***defaultTriggerName*** u ***on*** no las tendrá en cuenta.
+
+### Grupo de consumidores
+
+Cuando se inicia **Cavani**, el grupo de consumidores debe estar ya creado en **Redis**.
+Para hacerlo, podemos utilizar el siguiente comando **Redis**:
+
+```bash
+$ redis-cli XGROUP CREATE nombreFlujo nombreGrupo $ MKSTREAM
+```
+
+### Paralelismo
+
+En **Cavani**, un motor (*engine*) puede contener varios ejecutores, permitiendo así que varios trabajos se puedan ejecutar concurrentemente.
+El **paralelismo** (*parallelism*) indica cuántos ejecutores podemos tener.
+De manera predeterminada, se usa el doble de *cores* que tiene la máquina en la que se está ejecutando.
+Para fijar otro valor, podemos usar la propiedad ***parallelism*** del catálogo como, por ejemplo:
+
+```yaml
+parallelism: 4
+```
+
+Para ayudar a decidir un valor, se ha creado los siguientes datos en el conjunto de datos global:
+***cores***, ***doubleCores*** y ***halfCores***.
