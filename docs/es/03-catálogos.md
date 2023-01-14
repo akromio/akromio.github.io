@@ -279,3 +279,65 @@ Podemos construir un catálogo de trabajos fácilmente mediante el siguiente com
 ```bash
 $ gattuso -g git -c job r create
 ```
+
+## Grupos de trabajos
+
+Un **grupo de trabajos** (*group of jobs*) es una colección de trabajos que comparten algunas cosas en común como, por ejemplo, una etiqueta y, si es necesario, unas declaraciones de datos.
+Estos grupos se definen en la propiedad ***jobs*** del catálogo con una sintaxis similar a la siguiente:
+
+```yaml
+- group: nombre-grupo
+  dataset:
+    # definiciones de datos a definir en cada uno de sus trabajos
+  jobs:
+    # trabajos que pertenecen al grupo
+```
+
+Veamos un ejemplo:
+
+```yaml
+- group: botnet
+  dataset:
+    - const: network
+      desc: Network option for docker run.
+      value: --network=$(net.name)
+    - const: volume
+      desc: Volume option for docker run
+      value: -v $(workDir)/registry:/registry
+  jobs:
+    - macro: create-botnet
+      title: Create the botnet
+      steps:
+        - create-broker
+        - create-bots
+        - create-mgr
+    
+    - macro: remove-botnet
+      title: Remove the botnet
+      steps:
+        - remove-bots
+        - remove-mgr
+        - remove-broker
+    
+    - macro: create-broker
+      # ...
+    
+    - macro: remove-broker
+      # ...
+
+    - macro: create-mgr
+      # ...
+    
+    - macro: remove-mgr
+      # ...
+    
+    - macro: create-bots
+      # ...
+
+    - macro: remove-bots
+      # ...
+```
+
+En el ejemplo anterior, todos los trabajos definidos en la propiedad ***jobs*** del grupo, tendrán una etiqueta (*tag*) que será el nombre del grupo.
+Por otra parte, todos ellos definirán, como si lo hubieran hecho en su propia definición, los datos del ***dataset*** del grupo.
+Así podemos definir declaraciones compartidas a nivel de grupo, reduciendo su duplicidad.
