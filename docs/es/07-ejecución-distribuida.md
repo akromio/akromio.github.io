@@ -384,14 +384,14 @@ $ carboni r pause warmup:botnet1 load:botnet2
 
 #### Distribuidor de *Redis*
 
-El **distribuidor de *Redis*** (*Redis distributor*) tiene como objeto dejar las peticiones en flujos (*streams*) de **Redis**.
+El **distribuidor de *Redis*** (*Redis distributor*) tiene como objeto dejar las peticiones en flujos (*streams*) o canales (*channels*) de **Redis**.
 Por lo tanto, tanto **Carboni** como los agentes **Cavani** deben saber cómo llegar a la instancia de **Redis**.
 **Carboni** para escribir en ella y los **Cavani**s para leer de ella.
-El identificador de cada *bot* es el nombre del flujo en el que debe escribir **Carboni**.
-A cada **Cavani**, le indicaremos cuál es el flujo del que debe extraer sus peticiones de ejecución.
-En el ejemplo anterior, los flujos serían *cavani1*, *cavani2* y *cavani3*.
+El identificador de cada *bot* es el nombre del flujo o canal en el que debe escribir **Carboni**.
+A cada **Cavani**, le indicaremos cuál es el flujo o canal del que debe extraer sus peticiones de ejecución.
+En el ejemplo anterior, los flujos o canales serían *cavani1*, *cavani2* y *cavani3*.
 
-La configuración de **Redis** se indica en la *botnet* como sigue:
+Cuando usamos **Redis Streams**, la configuración de **Redis** se indica en la *botnet* como sigue:
 
 ```json
 {
@@ -406,8 +406,23 @@ La configuración de **Redis** se indica en la *botnet* como sigue:
 }
 ```
 
+Para **Redis Pub/Sub**, las cosas son muy similares, salvo que ***impl*** debe ser **redispubsub**:
+
+```json
+{
+  "impl": "redispubsub",
+  "host": "localhost",
+  "port": 6379,
+  "bots": [
+    {"bot": "cavani1"},
+    {"bot": "cavani2"},
+    {"bot": "cavani3"}
+  ]
+}
+```
+
 Puede definir el argumento de la *botnet* en un archivo **YAML** y usar **carboni encode** para obtener su representación en **json+encode**.
-Tal y como hemos hecho en los ejemplos anteriores.
+Tal y como hemos hecho en ejemplos anteriores.
 
 Una nota antes de continuar.
 Aunque hemos usado variables de entorno **KRM_ARG_** para pasar los argumentos relacionados con las *botnets*, podríamos hacerlo también con la opción ***-a***.
@@ -449,12 +464,13 @@ $ gattuso -g git -c stage r create
 
 **Cavani** es la aplicación para la ejecución basada en eventos.
 Ya hemos visto el evento planificado que permite ejecutar un trabajo a intervalos.
-Otra posibilidad son los eventos recibidos a través de un flujo de **Redis Streams** generado por **Carboni**.
+Otra posibilidad son los eventos recibidos a través de un flujo de **Redis Streams** o un canal de **Redis Pub/Sub** generado por **Carboni**.
 
 Este tipo de evento se configura como sigue:
 
 ```yaml
 on:
+  # Redis Streams
   - trigger: nombre
     impl: redisstreams
     host: servidor de Redis
@@ -464,6 +480,15 @@ on:
     stream: flujo del que leer
     group: grupo de consumidores
     consumer: identificador de la instancia de Cavani
+  
+  # Redis Pub/Sub
+  - trigger: nombre
+    impl: redispubsub
+    host: servidor de Redis
+    port: puerto en el que escucha Redis
+    username: nombre de usuario si es necesario
+    password: contraseña si se usa usuario
+    channel: canal del que leer
 ```
 
 Ejemplo:
@@ -479,7 +504,7 @@ on:
     consumer: cavani1
 ```
 
-Cuando se ejecuta **Cavani** hay que indicarle el catálogo en el que se encuentran los trabajos que debe ejecutar y el disparador de **Redis Streams**.
+Cuando se ejecuta **Cavani** hay que indicarle el catálogo en el que se encuentran los trabajos que debe ejecutar y el disparador.
 Ejemplo:
 
 ```bash
@@ -490,7 +515,7 @@ Si no se indica el disparador, se usará el predeterminado, o sea, el indicado p
 
 Un catálogo de trabajos de **Cavani** es legible sin problemas por **Gattuso**, exceptuando que las propiedades específicas como, por ejemplo, ***defaultTriggerName*** u ***on*** no las tendrá en cuenta.
 
-### Grupo de consumidores
+### Grupo de consumidores en *Redis Streams*
 
 Cuando se inicia **Cavani**, el grupo de consumidores debe estar ya creado en **Redis**.
 Para hacerlo, podemos utilizar el siguiente comando **Redis**:
