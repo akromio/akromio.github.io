@@ -22,3 +22,8 @@ minima:
       user_url: https://twitter.com/siacodelabs
 
 google_analytics: G-Z2FF4NRNY9
+
+webrick:
+  headers:
+    Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+    X-XSS-Protection: 1; mode=block
