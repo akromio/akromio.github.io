@@ -1,7 +1,8 @@
 title: akromio
 description: Documentación
-url: https://akromio.com
-baseurl: /
+# url: https://akromio.com
+# url: localhost
+# baseurl: /
 
 brand:
   name: Akromio
@@ -10,6 +11,7 @@ ws:
   year: 2022-2023
 
 plugins:
+  - jekyll-remote-theme
   - jekyll-sitemap
 
 remote_theme: jekyll/minima

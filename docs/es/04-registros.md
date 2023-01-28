@@ -1,6 +1,7 @@
 ---
 title: Registros
 permalink: /es/registros
+layout: default
 ---
 
 Un **registro** (*registry*) es un contenedor de catálogos.
