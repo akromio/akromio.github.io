@@ -1,6 +1,7 @@
 ---
 title: Ejecución distribuida
 permalink: /es/ejecucion-distribuida
+layout: default
 ---
 
 **Akromio** se ha desarrollado tanto para su ejecución local como distribuida.

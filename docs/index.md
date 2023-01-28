@@ -1,3 +1,8 @@
+---
+permalink: /
+layout: default
+---
+
 **Documentación en Español**:
 
 01. [Instalación](es/instalacion)
