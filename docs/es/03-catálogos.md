@@ -1,7 +1,7 @@
 ---
 title: Catálogos
 permalink: /es/catalogos
-layout: default
+layout: page
 ---
 
 Un **catálogo** (*catalog*) representa un índice de trabajos, donde un **trabajo** (*job*) una operación para realizar alguna cosa particular como, por ejemplo, un proceso automatizado.

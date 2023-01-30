@@ -1,7 +1,7 @@
 ---
 title: Disparadores
 permalink: /es/disparadores
-layout: default
+layout: page
 ---
 
 Los trabajos de un catálogo se pueden ejecutar de manera manual o bien bajo disparadores.

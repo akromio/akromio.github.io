@@ -1,6 +1,6 @@
 ---
 permalink: /
-layout: default
+layout: home
 ---
 
 **Documentación en Español**:

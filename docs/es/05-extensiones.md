@@ -1,7 +1,7 @@
 ---
 title: Extensiones
 permalink: /es/extensiones
-layout: default
+layout: page
 ---
 
 La **extensión de un catálogo** (*extension catalog*) es la capacidad de reutilizar un catálogo existente.
