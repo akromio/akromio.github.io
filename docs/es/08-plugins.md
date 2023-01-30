@@ -1,7 +1,7 @@
 ---
 title: Plugins
 permalink: /es/plugins
-layout: default
+layout: page
 ---
 
 Un ***plugin*** es un componente que aporta operaciones extras para su utilización en los catálogos de trabajo.
