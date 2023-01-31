@@ -1,8 +1,6 @@
 title: akromio
 description: Documentación
-# url: https://akromio.com
-# url: localhost
-# baseurl: /
+baseurl: /
 
 brand:
   name: Akromio
