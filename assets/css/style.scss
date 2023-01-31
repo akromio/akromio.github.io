@@ -1,0 +1,24 @@
+---
+---
+
+@import "minima/skins/{{ site.minima.skin | default: 'classic' }}";
+@import "minima/initialize";
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
+.site-title {
+  font-family: 'Comfortaa', cursive;
+  color: #FF671F;
+}
+
+footer.site-footer.h-card {
+  text-align: center;
+}
+
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    max-width: 1024px;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}

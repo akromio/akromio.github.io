@@ -2,15 +2,15 @@ source "https://rubygems.org"
 
 # Jekyll
 gem "jekyll", "~> 3.9.2"
-gem "minima", "~> 2.0" # default theme
+gem "minima"
 gem "kramdown-parser-gfm"
 
 # Local webserver
-gem "webrick", "~> 1.8"
+gem "webrick"
 
 # Plugins
 group :jekyll_plugins do
-  gem "jekyll-remote-theme", "~> 0.4.3"
-  gem "jekyll-feed", "~> 0.6"
-  gem "jekyll-sitemap", "~> 1.4"
+  gem "jekyll-remote-theme"
+  gem "jekyll-feed"
+  gem "jekyll-sitemap"
 end
