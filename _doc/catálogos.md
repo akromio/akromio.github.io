@@ -1,6 +1,5 @@
 ---
 title: Catálogos
-layout: page
 order: 3
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Disparadores
-layout: page
 order: 6
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Patrocinio
-layout: page
 order: 1
 description: |
   Cómo ayudar al desarrollo del proyecto Akromio mediante el patrocinio.

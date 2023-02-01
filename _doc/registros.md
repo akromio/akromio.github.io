@@ -1,6 +1,5 @@
 ---
 title: Registros
-layout: page
 order: 4
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Datos
-layout: page
 order: 2
 ---
 

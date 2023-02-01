@@ -1,6 +1,5 @@
 ---
 title: Extensiones
-layout: page
 order: 5
 ---
 
