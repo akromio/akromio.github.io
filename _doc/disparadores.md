@@ -1,7 +1,7 @@
 ---
 title: Disparadores
-permalink: /es/disparadores
 layout: page
+order: 6
 ---
 
 Los trabajos de un catálogo se pueden ejecutar de manera manual o bien bajo disparadores.

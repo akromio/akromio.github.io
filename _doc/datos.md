@@ -1,7 +1,7 @@
 ---
 title: Datos
-permalink: /es/datos
 layout: page
+order: 2
 ---
 
 Un **conjunto de datos** (*dataset*) es una colección de datos que podemos usar.

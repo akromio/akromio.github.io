@@ -5,14 +5,25 @@
 @import "minima/initialize";
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika&display=swap');
 
 .site-title {
   font-family: 'Comfortaa', cursive;
-  color: #FF671F;
+  color: #FF671F !important;
 }
 
 footer.site-footer.h-card {
   text-align: center;
+}
+
+.page-link {
+  font-family: 'Signika', sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.page-active {
+  color: #E64F3B !important;
 }
 
 @media screen and (min-width: 1280px) {

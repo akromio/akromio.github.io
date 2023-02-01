@@ -1,6 +1,7 @@
 title: akromio
 description: Documentación
 baseurl: /
+google_analytics: G-Z2FF4NRNY9
 
 brand:
   name: Akromio
@@ -21,4 +22,24 @@ minima:
     - platform: twitter
       user_url: https://twitter.com/siacodelabs
 
-google_analytics: G-Z2FF4NRNY9
+collections:
+  sponsorship:
+    title: Patrocinio
+    output: true
+    permalink: /:collection/:path
+    order:
+      - patrocinio.md
+      - roadmap.md
+  doc:
+    title: Documentación
+    output: true
+    permalink: /:collection/:path
+    order:
+      - instalación.md
+      - datos.md
+      - catálogos.md
+      - registros.md
+      - extensiones.md
+      - disparadores.md
+      - ejecución-distribuida.md
+      - plugins.md
