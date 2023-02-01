@@ -1,6 +1,5 @@
 ---
 title: Roadmap
-layout: page
 order: 2
 desciption: |
   Roadmap del proyecto Akromio.

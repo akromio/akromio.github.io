@@ -1,6 +1,5 @@
 ---
 title: Ejecución distribuida
-layout: page
 order: 7
 ---
 

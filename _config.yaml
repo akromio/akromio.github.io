@@ -43,3 +43,15 @@ collections:
       - disparadores.md
       - ejecución-distribuida.md
       - plugins.md
+
+defaults:
+  - scope:
+      path: ""
+      type: doc
+    values:
+      layout: page
+  - scope:
+      path: ""
+      type: sponsorship
+    values:
+      layout: page
