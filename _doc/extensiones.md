@@ -1,7 +1,7 @@
 ---
 title: Extensiones
-permalink: /es/extensiones
 layout: page
+order: 5
 ---
 
 La **extensión de un catálogo** (*extension catalog*) es la capacidad de reutilizar un catálogo existente.

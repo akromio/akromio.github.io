@@ -1,7 +1,7 @@
 ---
 title: Plugins
-permalink: /es/plugins
 layout: page
+order: 8
 ---
 
 Un ***plugin*** es un componente que aporta operaciones extras para su utilización en los catálogos de trabajo.
