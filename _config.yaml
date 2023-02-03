@@ -1,17 +1,27 @@
-title: akromio
-description: Suite de automatización para equipos de IT
+title: Akromio
+locale: es_ES
+tagline: Suite de automatización para equipos de IT
+description: |
+  Akromio es una suite de automatización de tareas realizadas comúnmente por
+  desarrolladores de software, administradores, pentesters y otros roles de IT.
 baseurl: /
 google_analytics: G-Z2FF4NRNY9
 
-brand:
-  name: Akromio
-  author: Sia Codelabs
+author:
+  name: Sia Codelabs
+  twitter: siacodelabs
+
+twitter:
+  card: summary
+  username: siacodelabs
+
 ws:
   year: 2022-2023
 
 plugins:
-  - jekyll-remote-theme
+  - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-remote-theme
 
 remote_theme: jekyll/minima
 minima:
