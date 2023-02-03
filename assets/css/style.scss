@@ -7,6 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Signika&display=swap');
 
+/* override */
 .site-title {
   font-family: 'Comfortaa', cursive;
   text-transform: lowercase;
@@ -25,6 +26,13 @@ footer.site-footer.h-card {
 
 .page-active {
   color: #E64F3B !important;
+}
+
+/* custom */
+.post-reading-time {
+  font-size: medium;
+  font-style: italic;
+  margin-bottom: 15pt;
 }
 
 @media screen and (min-width: 1280px) {

@@ -59,7 +59,7 @@ defaults:
       path: ""
       type: doc
     values:
-      layout: page
+      layout: doc-page
   - scope:
       path: ""
       type: sponsorship
