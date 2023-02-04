@@ -96,6 +96,41 @@ Lo siguiente es similar:
 - input: nombre
 ```
 
+### Modificación implícita de la iniciación del dato
+
+Los datos aceptan varias propiedades con las que poder modificar el valor proporcionado por ***value***.
+Si el dato es una lista, podemos indicar que se añadan elementos al principio y/o al final mediante las propiedades ***prepend*** y ***append***:
+
+```yaml
+- const: l1
+  value: [4, 5, 6]
+
+- const: l2
+  value: $(l1)
+  prepend: [1, 2, 3]
+  append: [7, 8, 9]
+```
+
+En este ejemplo, *l2* valdrá *[1, 2, 3, 4, 5, 6, 7, 8, 9]*.
+
+En cambio, con objetos o mapas, la propiedad ***merge*** permite añadir propiedades extras a lo indicado en ***value***:
+
+```yaml
+- const: m1
+  value:
+    x: 1
+    z: 3
+
+- const: m2
+  value: $(m1)
+  merge:
+    y: 2
+```
+
+En el ejemplo anterior, *m1* valdrá *{x: 1, z: 3}*; y *m2*, *{x: 1, y: 2, z: 3}*.
+
+Este tres propiedades, ***merge***, ***prepend*** y ***append***, son muy útiles para reutilizar valores previos o para garantizar que una propiedad siempre tiene un determinado valor, independientemente de lo indicado en el valor dado.
+
 ## Acceso al conjunto de datos
 
 **Akromio** permite el uso de expresiones en los campos.
